@@ -1,0 +1,57 @@
+title:
+ bivariate growth model autonomic space
+ 
+data:
+FILE = all.long0.csv;
+
+variable:
+names are
+ID	study	task	RSA	PEP
+RSAz	PEPz	RSAb	PEPb	gender	feedback
+ps2	psc	rt2	rt3
+baseline	math	prep	qa	recover speech
+female	negative	positive	RSAbc	PEPbc;
+
+USEVARIABLES = rsaz pepz rsabc pepbc female
+!math prep qa recover speech; 
+rt2 psc positive;
+within = rsaz pepz;
+!math prep qa recover speech;
+between = female rsabc pepbc
+rt2 psc positive;
+
+CLUSTER = id;
+
+missing = .;
+	
+ANALYSIS:
+	coverage = 0;
+	!model = nocovariances;
+	TYPE = TWOLEVEL RANDOM;
+	ESTIMATOR = ML;
+
+MODEL:
+
+%WITHIN%
+
+S|rsaz on pepz;
+
+[rsaz@0 pepz@0];
+
+%BETWEEN%
+ 
+S; [S];
+
+s on female pepbc rt2 psc positive; 
+
+s on rsabc (b);
+
+rsabc on female (a);
+
+MODEL CONSTRAINT:
+
+NEW(ind);
+
+ind=a*b;
+
+OUTPUT: SAMPSTAT STANDARDIZED CINTERVAL;

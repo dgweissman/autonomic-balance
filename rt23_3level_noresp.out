@@ -1,0 +1,554 @@
+Mplus VERSION 8 (Mac)
+MUTHEN & MUTHEN
+08/12/2019   3:29 PM
+
+INPUT INSTRUCTIONS
+
+  title:
+   bivariate growth model autonomic space
+
+  data:
+  FILE = long.wresp0.csv;
+
+  variable:
+  names are
+  ID	RSA	PEP	Resp	task	RSAz	PEPz	
+  RSAb	PEPb	Respc	rt3	
+  baseline	math	prep	recover	speech
+  rsabc pepbc;
+
+
+  USEVARIABLES = rsaz pepz
+  !respc
+  rsabc pepbc
+  speech math recover prep
+  rt3
+  ;
+  within = rsaz pepz
+  !respc
+  ;
+  between =
+  (task) speech math recover prep
+  (id)
+  rsabc pepbc rt3
+  ;
+
+  CLUSTER = id task;
+
+  missing = .;
+  	
+  ANALYSIS:
+  	coverage = 0;
+  	!model = nocovariances;
+  	TYPE = THREELEVEL RANDOM;
+  	ESTIMATOR = ML;
+
+  MODEL:
+
+  %WITHIN%
+
+  !rsaz on respc;
+
+  !pepz on respc;
+
+  S|rsaz on pepz;
+
+  [rsaz@0 pepz@0];
+
+  %BETWEEN TASK%
+
+  S on speech math recover prep;
+
+  %BETWEEN ID%
+
+  S; [S];
+
+  s on
+  rsabc pepbc
+  rt3
+  ;
+
+
+  OUTPUT: SAMPSTAT STANDARDIZED CINTERVAL;
+
+
+
+*** WARNING in MODEL command
+  Variable on the left-hand side of an ON statement in a | statement is a
+  WITHIN variable.  The intercept for this variable is not random.
+  Variable:  RSAZ
+*** WARNING
+  Clusters for TASK with the same IDs have been found in different clusters
+  for ID.  These clusters are assumed to be different because clusters for
+  TASK are not allowed to appear in more than one cluster for ID.
+*** WARNING in OUTPUT command
+  STANDARDIZED (STD, STDY, STDYX) options are available only for TYPE=TWOLEVEL RANDOM
+  with ESTIMATOR=BAYES.  Request for STANDARDIZED (STD, STDY, STDYX) is ignored.
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+bivariate growth model autonomic space
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        5288
+
+Number of dependent variables                                    1
+Number of independent variables                                  8
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   RSAZ
+
+Observed independent variables
+   PEPZ        RSABC       PEPBC       SPEECH      MATH        RECOVER
+   PREP        RT3
+
+Continuous latent variables
+   S
+
+Variables with special functions
+
+  Cluster variables     ID        TASK
+
+  Within variables
+   RSAZ        PEPZ
+
+  Level 2 between variables
+   SPEECH      MATH        RECOVER     PREP
+
+  Level 3 between variables
+   RSABC       PEPBC
+   RT3
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-02
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  long.wresp0.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of TASK clusters             1086
+     Number of ID clusters                220
+
+     Average cluster size for TASK level        4.869
+
+     Estimated Intraclass Correlations for the Y Variables for TASK level
+
+                Intraclass
+     Variable  Correlation
+
+
+     Average cluster size for ID level       24.036
+
+     Estimated Intraclass Correlations for the Y Variables for ID level
+
+                Intraclass
+     Variable  Correlation
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.000
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           1.000
+ PEPZ           1.000         1.000
+ RSABC          1.000         1.000         1.000
+ PEPBC          1.000         1.000         1.000         1.000
+ SPEECH         1.000         1.000         1.000         1.000         1.000
+ MATH           1.000         1.000         1.000         1.000         1.000
+ RECOVER        1.000         1.000         1.000         1.000         1.000
+ PREP           1.000         1.000         1.000         1.000         1.000
+ RT3            1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              MATH          RECOVER       PREP          RT3
+              ________      ________      ________      ________
+ MATH           1.000
+ RECOVER        1.000         1.000
+ PREP           1.000         1.000         1.000
+ RT3            1.000         1.000         1.000         1.000
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+               -0.007        -0.001         0.000         0.000         0.000
+
+
+           Means
+              MATH          RECOVER       PREP          RT3
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           Covariances
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           0.949
+ PEPZ           0.116         0.963
+ RSABC          0.000         0.000         0.000
+ PEPBC          0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              MATH          RECOVER       PREP          RT3
+              ________      ________      ________      ________
+ MATH           0.000
+ RECOVER        0.000         0.000
+ PREP           0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000
+
+
+           Correlations
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           1.000
+ PEPZ           0.121         1.000
+ RSABC          0.000         0.000         0.000
+ PEPBC          0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              MATH          RECOVER       PREP          RT3
+              ________      ________      ________      ________
+ MATH           0.000
+ RECOVER        0.000         0.000
+ PREP           0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN TASK
+
+
+           Means
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.197
+
+
+           Means
+              MATH          RECOVER       PREP          RT3
+              ________      ________      ________      ________
+                0.199         0.199         0.203         0.000
+
+
+           Covariances
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           0.000
+ PEPZ           0.000         0.000
+ RSABC          0.000         0.000         0.000
+ PEPBC          0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         0.158
+ MATH           0.000         0.000         0.000         0.000        -0.039
+ RECOVER        0.000         0.000         0.000         0.000        -0.039
+ PREP           0.000         0.000         0.000         0.000        -0.040
+ RT3            0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              MATH          RECOVER       PREP          RT3
+              ________      ________      ________      ________
+ MATH           0.159
+ RECOVER       -0.040         0.159
+ PREP          -0.040        -0.040         0.162
+ RT3            0.000         0.000         0.000         0.000
+
+
+           Correlations
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           0.000
+ PEPZ           0.000         0.000
+ RSABC          0.000         0.000         0.000
+ PEPBC          0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         1.000
+ MATH           0.000         0.000         0.000         0.000        -0.247
+ RECOVER        0.000         0.000         0.000         0.000        -0.247
+ PREP           0.000         0.000         0.000         0.000        -0.250
+ RT3            0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              MATH          RECOVER       PREP          RT3
+              ________      ________      ________      ________
+ MATH           1.000
+ RECOVER       -0.248         1.000
+ PREP          -0.251        -0.251         1.000
+ RT3            0.000         0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN ID
+
+
+           Means
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+                0.000         0.000        -0.027         0.264         0.000
+
+
+           Means
+              MATH          RECOVER       PREP          RT3
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.305
+
+
+           Covariances
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           0.000
+ PEPZ           0.000         0.000
+ RSABC          0.000         0.000         1.599
+ PEPBC          0.000         0.000        -3.210       347.251
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000        -0.066         1.808         0.000
+
+
+           Covariances
+              MATH          RECOVER       PREP          RT3
+              ________      ________      ________      ________
+ MATH           0.000
+ RECOVER        0.000         0.000
+ PREP           0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.212
+
+
+           Correlations
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           0.000
+ PEPZ           0.000         0.000
+ RSABC          0.000         0.000         1.000
+ PEPBC          0.000         0.000        -0.136         1.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000        -0.113         0.211         0.000
+
+
+           Correlations
+              MATH          RECOVER       PREP          RT3
+              ________      ________      ________      ________
+ MATH           0.000
+ RECOVER        0.000         0.000
+ PREP           0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -14728.221
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     RSAZ                 -0.007       0.418      -3.332    0.02%      -0.785     -0.331     -0.101
+            5288.000       0.949       0.693       4.368    0.02%       0.148      0.786
+     PEPZ                 -0.001      -0.225      -4.534    0.02%      -0.801     -0.259     -0.009
+            5288.000       0.963       0.265       4.477    0.02%       0.253      0.897
+     RSABC                -0.027       0.117      -3.625    0.45%      -1.056     -0.319     -0.002
+             220.000       1.599       0.517       3.937    0.45%       0.288      0.846
+     PEPBC                 0.264      -0.761     -70.767    0.45%      -9.767     -1.967      2.533
+             220.000     347.251       1.855      57.833    0.45%       5.033     13.433
+     SPEECH                0.200       1.500       0.000   80.00%       0.000      0.000      0.000
+               5.000       0.160       0.250       1.000   20.00%       0.000      0.000
+     MATH                  0.200       1.500       0.000   80.00%       0.000      0.000      0.000
+               5.000       0.160       0.250       1.000   20.00%       0.000      0.000
+     RECOVER               0.200       1.500       0.000   80.00%       0.000      0.000      0.000
+               5.000       0.160       0.250       1.000   20.00%       0.000      0.000
+     PREP                  0.200       1.500       0.000   80.00%       0.000      0.000      0.000
+               5.000       0.160       0.250       1.000   20.00%       0.000      0.000
+     RT3                   0.305       0.849       0.000   69.55%       0.000      0.000      0.000
+             220.000       0.212      -1.279       1.000   30.45%       0.000      1.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       12
+
+Loglikelihood
+
+          H0 Value                      -14523.460
+
+Information Criteria
+
+          Akaike (AIC)                   29070.919
+          Bayesian (BIC)                 29149.798
+          Sample-Size Adjusted BIC       29111.665
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ Means
+    PEPZ               0.000      0.000    999.000    999.000
+
+ Intercepts
+    RSAZ               0.000      0.000    999.000    999.000
+
+ Variances
+    PEPZ               0.963      0.019     51.420      0.000
+
+ Residual Variances
+    RSAZ               0.780      0.017     46.623      0.000
+
+Between TASK Level
+
+ S          ON
+    SPEECH            -0.060      0.054     -1.107      0.268
+    MATH              -0.026      0.053     -0.494      0.622
+    RECOVER           -0.069      0.051     -1.352      0.176
+    PREP               0.048      0.044      1.083      0.279
+
+ Residual Variances
+    S                  0.074      0.014      5.477      0.000
+
+Between ID Level
+
+ S          ON
+    RSABC              0.098      0.019      5.059      0.000
+    PEPBC              0.000      0.001     -0.178      0.859
+    RT3                0.196      0.053      3.679      0.000
+
+ Intercepts
+    S                  0.071      0.040      1.766      0.077
+
+ Residual Variances
+    S                  0.070      0.013      5.596      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.155E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ Means
+    PEPZ             0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Intercepts
+    RSAZ             0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Variances
+    PEPZ             0.915       0.926       0.932       0.963       0.994       1.000       1.011
+
+ Residual Variances
+    RSAZ             0.737       0.748       0.753       0.780       0.808       0.813       0.824
+
+Between TASK Level
+
+ S        ON
+    SPEECH          -0.199      -0.166      -0.149      -0.060       0.029       0.046       0.079
+    MATH            -0.162      -0.130      -0.113      -0.026       0.061       0.078       0.110
+    RECOVER         -0.200      -0.169      -0.153      -0.069       0.015       0.031       0.062
+    PREP            -0.066      -0.039      -0.025       0.048       0.121       0.134       0.162
+
+ Residual Variances
+    S                0.039       0.048       0.052       0.074       0.097       0.101       0.109
+
+Between ID Level
+
+ S        ON
+    RSABC            0.048       0.060       0.066       0.098       0.130       0.136       0.148
+    PEPBC           -0.004      -0.003      -0.002       0.000       0.002       0.002       0.003
+    RT3              0.059       0.092       0.109       0.196       0.284       0.301       0.334
+
+ Intercepts
+    S               -0.032      -0.008       0.005       0.071       0.137       0.149       0.174
+
+ Residual Variances
+    S                0.038       0.046       0.049       0.070       0.091       0.095       0.102
+
+
+     Beginning Time:  15:29:15
+        Ending Time:  15:29:30
+       Elapsed Time:  00:00:15
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

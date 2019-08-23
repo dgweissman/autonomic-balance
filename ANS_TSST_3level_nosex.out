@@ -1,0 +1,698 @@
+Mplus VERSION 8 (Mac)
+MUTHEN & MUTHEN
+08/12/2019   1:36 PM
+
+INPUT INSTRUCTIONS
+
+  title:
+   bivariate growth model autonomic space
+
+  data:
+  FILE = all.long0.csv;
+
+  variable:
+  names are
+  ID	study	task	RSA	PEP
+  RSAz	PEPz	RSAb	PEPb	gender	feedback
+  ps2	psc	rt2	rt3	
+  baseline	math	prep	qa	recover speech	
+  female	negative	positive rsabc pepbc;
+
+
+  USEVARIABLES = rsaz pepz
+  rsabc pepbc
+  speech math recover qa prep
+  psc ps2 rt3
+  positive
+  ;
+  within = rsaz pepz;
+  between =
+  (task) speech math recover qa prep
+  (id)
+  rsabc pepbc
+  psc ps2 rt3
+  positive
+  ;
+
+  CLUSTER = id task;
+
+  missing = .;
+  	
+  ANALYSIS:
+  	coverage = 0;
+  	!model = nocovariances;
+  	TYPE = THREELEVEL RANDOM;
+  	ESTIMATOR = ML;
+
+  MODEL:
+
+  %WITHIN%
+
+  S|rsaz on pepz;
+
+  [rsaz@0 pepz@0];
+
+  %BETWEEN TASK%
+
+  S on speech math recover qa prep;
+
+  %BETWEEN ID%
+
+  S; [S];
+
+  s on
+  rsabc pepbc
+  rt3 psc ps2
+  positive
+  ;
+
+
+  OUTPUT: SAMPSTAT STANDARDIZED CINTERVAL;
+
+
+
+*** WARNING in MODEL command
+  Variable on the left-hand side of an ON statement in a | statement is a
+  WITHIN variable.  The intercept for this variable is not random.
+  Variable:  RSAZ
+*** WARNING
+  Clusters for TASK with the same IDs have been found in different clusters
+  for ID.  These clusters are assumed to be different because clusters for
+  TASK are not allowed to appear in more than one cluster for ID.
+*** WARNING in OUTPUT command
+  STANDARDIZED (STD, STDY, STDYX) options are available only for TYPE=TWOLEVEL RANDOM
+  with ESTIMATOR=BAYES.  Request for STANDARDIZED (STD, STDY, STDYX) is ignored.
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+bivariate growth model autonomic space
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        7453
+
+Number of dependent variables                                    1
+Number of independent variables                                 12
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   RSAZ
+
+Observed independent variables
+   PEPZ        RSABC       PEPBC       SPEECH      MATH        RECOVER
+   QA          PREP        PSC         PS2         RT3         POSITIVE
+
+Continuous latent variables
+   S
+
+Variables with special functions
+
+  Cluster variables     ID        TASK
+
+  Within variables
+   RSAZ        PEPZ
+
+  Level 2 between variables
+   SPEECH      MATH        RECOVER     QA          PREP
+
+  Level 3 between variables
+   RSABC
+   PEPBC       PSC         PS2         RT3         POSITIVE
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-02
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  all.long0.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of TASK clusters             1582
+     Number of ID clusters                325
+
+     Average cluster size for TASK level        4.711
+
+     Estimated Intraclass Correlations for the Y Variables for TASK level
+
+                Intraclass
+     Variable  Correlation
+
+
+     Average cluster size for ID level       22.932
+
+     Estimated Intraclass Correlations for the Y Variables for ID level
+
+                Intraclass
+     Variable  Correlation
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.000
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           1.000
+ PEPZ           1.000         1.000
+ RSABC          1.000         1.000         1.000
+ PEPBC          1.000         1.000         1.000         1.000
+ SPEECH         1.000         1.000         1.000         1.000         1.000
+ MATH           1.000         1.000         1.000         1.000         1.000
+ RECOVER        1.000         1.000         1.000         1.000         1.000
+ QA             1.000         1.000         1.000         1.000         1.000
+ PREP           1.000         1.000         1.000         1.000         1.000
+ PSC            1.000         1.000         1.000         1.000         1.000
+ PS2            1.000         1.000         1.000         1.000         1.000
+ RT3            1.000         1.000         1.000         1.000         1.000
+ POSITIVE       1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              MATH          RECOVER       QA            PREP          PSC
+              ________      ________      ________      ________      ________
+ MATH           1.000
+ RECOVER        1.000         1.000
+ QA             1.000         1.000         1.000
+ PREP           1.000         1.000         1.000         1.000
+ PSC            1.000         1.000         1.000         1.000         1.000
+ PS2            1.000         1.000         1.000         1.000         1.000
+ RT3            1.000         1.000         1.000         1.000         1.000
+ POSITIVE       1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              PS2           RT3           POSITIVE
+              ________      ________      ________
+ PS2            1.000
+ RT3            1.000         1.000
+ POSITIVE       1.000         1.000         1.000
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+               -0.001         0.010         0.000         0.000         0.000
+
+
+           Means
+              MATH          RECOVER       QA            PREP          PSC
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           Means
+              PS2           RT3           POSITIVE
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           Covariances
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           0.952
+ PEPZ           0.157         0.951
+ RSABC          0.000         0.000         0.000
+ PEPBC          0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ QA             0.000         0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ PSC            0.000         0.000         0.000         0.000         0.000
+ PS2            0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+ POSITIVE       0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              MATH          RECOVER       QA            PREP          PSC
+              ________      ________      ________      ________      ________
+ MATH           0.000
+ RECOVER        0.000         0.000
+ QA             0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000
+ PSC            0.000         0.000         0.000         0.000         0.000
+ PS2            0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+ POSITIVE       0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              PS2           RT3           POSITIVE
+              ________      ________      ________
+ PS2            0.000
+ RT3            0.000         0.000
+ POSITIVE       0.000         0.000         0.000
+
+
+           Correlations
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           1.000
+ PEPZ           0.165         1.000
+ RSABC          0.000         0.000         0.000
+ PEPBC          0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ QA             0.000         0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ PSC            0.000         0.000         0.000         0.000         0.000
+ PS2            0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+ POSITIVE       0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              MATH          RECOVER       QA            PREP          PSC
+              ________      ________      ________      ________      ________
+ MATH           0.000
+ RECOVER        0.000         0.000
+ QA             0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000
+ PSC            0.000         0.000         0.000         0.000         0.000
+ PS2            0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+ POSITIVE       0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              PS2           RT3           POSITIVE
+              ________      ________      ________
+ PS2            0.000
+ RT3            0.000         0.000
+ POSITIVE       0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN TASK
+
+
+           Means
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.200
+
+
+           Means
+              MATH          RECOVER       QA            PREP          PSC
+              ________      ________      ________      ________      ________
+                0.130         0.195         0.070         0.200         0.000
+
+
+           Means
+              PS2           RT3           POSITIVE
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           Covariances
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           0.000
+ PEPZ           0.000         0.000
+ RSABC          0.000         0.000         0.000
+ PEPBC          0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         0.160
+ MATH           0.000         0.000         0.000         0.000        -0.026
+ RECOVER        0.000         0.000         0.000         0.000        -0.039
+ QA             0.000         0.000         0.000         0.000        -0.014
+ PREP           0.000         0.000         0.000         0.000        -0.040
+ PSC            0.000         0.000         0.000         0.000         0.000
+ PS2            0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+ POSITIVE       0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              MATH          RECOVER       QA            PREP          PSC
+              ________      ________      ________      ________      ________
+ MATH           0.113
+ RECOVER       -0.025         0.157
+ QA            -0.009        -0.014         0.065
+ PREP          -0.026        -0.039        -0.014         0.160
+ PSC            0.000         0.000         0.000         0.000         0.000
+ PS2            0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+ POSITIVE       0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              PS2           RT3           POSITIVE
+              ________      ________      ________
+ PS2            0.000
+ RT3            0.000         0.000
+ POSITIVE       0.000         0.000         0.000
+
+
+           Correlations
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           0.000
+ PEPZ           0.000         0.000
+ RSABC          0.000         0.000         0.000
+ PEPBC          0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         1.000
+ MATH           0.000         0.000         0.000         0.000        -0.193
+ RECOVER        0.000         0.000         0.000         0.000        -0.246
+ QA             0.000         0.000         0.000         0.000        -0.137
+ PREP           0.000         0.000         0.000         0.000        -0.250
+ PSC            0.000         0.000         0.000         0.000         0.000
+ PS2            0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+ POSITIVE       0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              MATH          RECOVER       QA            PREP          PSC
+              ________      ________      ________      ________      ________
+ MATH           1.000
+ RECOVER       -0.190         1.000
+ QA            -0.106        -0.134         1.000
+ PREP          -0.194        -0.246        -0.137         1.000
+ PSC            0.000         0.000         0.000         0.000         0.000
+ PS2            0.000         0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+ POSITIVE       0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              PS2           RT3           POSITIVE
+              ________      ________      ________
+ PS2            0.000
+ RT3            0.000         0.000
+ POSITIVE       0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN ID
+
+
+           Means
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+                0.000         0.000        -0.016         0.118         0.000
+
+
+           Means
+              MATH          RECOVER       QA            PREP          PSC
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.175
+
+
+           Means
+              PS2           RT3           POSITIVE
+              ________      ________      ________
+                0.185         0.206         0.175
+
+
+           Covariances
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           0.000
+ PEPZ           0.000         0.000
+ RSABC          0.000         0.000         1.482
+ PEPBC          0.000         0.000        -1.171       319.261
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ QA             0.000         0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ PSC            0.000         0.000        -0.025        -0.013         0.000
+ PS2            0.000         0.000        -0.036        -0.669         0.000
+ RT3            0.000         0.000        -0.021         1.472         0.000
+ POSITIVE       0.000         0.000        -0.042        -0.246         0.000
+
+
+           Covariances
+              MATH          RECOVER       QA            PREP          PSC
+              ________      ________      ________      ________      ________
+ MATH           0.000
+ RECOVER        0.000         0.000
+ QA             0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000
+ PSC            0.000         0.000         0.000         0.000         0.145
+ PS2            0.000         0.000         0.000         0.000        -0.032
+ RT3            0.000         0.000         0.000         0.000        -0.036
+ POSITIVE       0.000         0.000         0.000         0.000         0.062
+
+
+           Covariances
+              PS2           RT3           POSITIVE
+              ________      ________      ________
+ PS2            0.151
+ RT3           -0.038         0.164
+ POSITIVE       0.051        -0.036         0.145
+
+
+           Correlations
+              RSAZ          PEPZ          RSABC         PEPBC         SPEECH
+              ________      ________      ________      ________      ________
+ RSAZ           0.000
+ PEPZ           0.000         0.000
+ RSABC          0.000         0.000         1.000
+ PEPBC          0.000         0.000        -0.054         1.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ QA             0.000         0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ PSC            0.000         0.000        -0.055        -0.002         0.000
+ PS2            0.000         0.000        -0.076        -0.097         0.000
+ RT3            0.000         0.000        -0.043         0.204         0.000
+ POSITIVE       0.000         0.000        -0.090        -0.036         0.000
+
+
+           Correlations
+              MATH          RECOVER       QA            PREP          PSC
+              ________      ________      ________      ________      ________
+ MATH           0.000
+ RECOVER        0.000         0.000
+ QA             0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000
+ PSC            0.000         0.000         0.000         0.000         1.000
+ PS2            0.000         0.000         0.000         0.000        -0.219
+ RT3            0.000         0.000         0.000         0.000        -0.235
+ POSITIVE       0.000         0.000         0.000         0.000         0.426
+
+
+           Correlations
+              PS2           RT3           POSITIVE
+              ________      ________      ________
+ PS2            1.000
+ RT3           -0.242         1.000
+ POSITIVE       0.344        -0.235         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -20677.912
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     RSAZ                 -0.001       0.316      -3.983    0.01%      -0.801     -0.308     -0.080
+            7453.000       0.952       0.497       4.368    0.01%       0.179      0.818
+     PEPZ                  0.010      -0.141      -4.534    0.01%      -0.772     -0.247     -0.004
+            7453.000       0.951       0.530       4.477    0.01%       0.260      0.871
+     RSABC                -0.016       0.086      -3.501    0.31%      -0.968     -0.301      0.015
+             325.000       1.482       0.476       4.061    0.31%       0.332      0.932
+     PEPBC                 0.118      -0.752     -69.711    0.31%      -9.911     -1.911      1.689
+             325.000     319.261       1.987      58.889    0.31%       4.689     13.689
+     SPEECH                0.167       1.789       0.000   83.33%       0.000      0.000      0.000
+               6.000       0.139       1.200       1.000   16.67%       0.000      0.000
+     MATH                  0.167       1.789       0.000   83.33%       0.000      0.000      0.000
+               6.000       0.139       1.200       1.000   16.67%       0.000      0.000
+     RECOVER               0.167       1.789       0.000   83.33%       0.000      0.000      0.000
+               6.000       0.139       1.200       1.000   16.67%       0.000      0.000
+     QA                    0.167       1.789       0.000   83.33%       0.000      0.000      0.000
+               6.000       0.139       1.200       1.000   16.67%       0.000      0.000
+     PREP                  0.167       1.789       0.000   83.33%       0.000      0.000      0.000
+               6.000       0.139       1.200       1.000   16.67%       0.000      0.000
+     PSC                   0.175       1.707       0.000   82.46%       0.000      0.000      0.000
+             325.000       0.145       0.914       1.000   17.54%       0.000      0.000
+     PS2                   0.185       1.626       0.000   81.54%       0.000      0.000      0.000
+             325.000       0.151       0.643       1.000   18.46%       0.000      0.000
+     RT3                   0.206       1.453       0.000   79.38%       0.000      0.000      0.000
+             325.000       0.164       0.110       1.000   20.62%       0.000      1.000
+     POSITIVE              0.175       1.707       0.000   82.46%       0.000      0.000      0.000
+             325.000       0.145       0.914       1.000   17.54%       0.000      0.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       16
+
+Loglikelihood
+
+          H0 Value                      -20406.557
+
+Information Criteria
+
+          Akaike (AIC)                   40845.114
+          Bayesian (BIC)                 40955.776
+          Sample-Size Adjusted BIC       40904.931
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ Means
+    PEPZ               0.000      0.000    999.000    999.000
+
+ Intercepts
+    RSAZ               0.000      0.000    999.000    999.000
+
+ Variances
+    PEPZ               0.951      0.016     61.045      0.000
+
+ Residual Variances
+    RSAZ               0.774      0.014     55.343      0.000
+
+Between TASK Level
+
+ S          ON
+    SPEECH            -0.045      0.044     -1.023      0.306
+    MATH              -0.044      0.054     -0.808      0.419
+    RECOVER           -0.179      0.045     -3.951      0.000
+    QA                -0.245      0.079     -3.095      0.002
+    PREP              -0.010      0.042     -0.236      0.813
+
+ Residual Variances
+    S                  0.096      0.013      7.433      0.000
+
+Between ID Level
+
+ S          ON
+    RSABC              0.098      0.016      6.327      0.000
+    PEPBC             -0.001      0.001     -0.945      0.345
+    RT3                0.187      0.050      3.755      0.000
+    PSC                0.150      0.067      2.239      0.025
+    PS2                0.138      0.063      2.205      0.027
+    POSITIVE           0.100      0.065      1.547      0.122
+
+ Intercepts
+    S                  0.116      0.038      3.069      0.002
+
+ Residual Variances
+    S                  0.046      0.009      4.915      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.728E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ Means
+    PEPZ             0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Intercepts
+    RSAZ             0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Variances
+    PEPZ             0.911       0.920       0.925       0.951       0.977       0.981       0.991
+
+ Residual Variances
+    RSAZ             0.738       0.747       0.751       0.774       0.797       0.802       0.810
+
+Between TASK Level
+
+ S        ON
+    SPEECH          -0.157      -0.130      -0.117      -0.045       0.027       0.041       0.068
+    MATH            -0.183      -0.150      -0.133      -0.044       0.045       0.062       0.096
+    RECOVER         -0.295      -0.267      -0.253      -0.179      -0.104      -0.090      -0.062
+    QA              -0.449      -0.400      -0.375      -0.245      -0.115      -0.090      -0.041
+    PREP            -0.119      -0.093      -0.080      -0.010       0.060       0.073       0.099
+
+ Residual Variances
+    S                0.063       0.071       0.075       0.096       0.117       0.121       0.129
+
+Between ID Level
+
+ S        ON
+    RSABC            0.058       0.068       0.073       0.098       0.124       0.129       0.138
+    PEPBC           -0.004      -0.003      -0.003      -0.001       0.001       0.001       0.002
+    RT3              0.059       0.090       0.105       0.187       0.269       0.285       0.316
+    PSC             -0.023       0.019       0.040       0.150       0.260       0.281       0.322
+    PS2             -0.023       0.015       0.035       0.138       0.242       0.261       0.300
+    POSITIVE        -0.066      -0.027      -0.006       0.100       0.206       0.226       0.266
+
+ Intercepts
+    S                0.019       0.042       0.054       0.116       0.178       0.189       0.213
+
+ Residual Variances
+    S                0.022       0.028       0.031       0.046       0.061       0.064       0.070
+
+
+     Beginning Time:  13:36:37
+        Ending Time:  13:37:12
+       Elapsed Time:  00:00:35
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

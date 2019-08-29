@@ -6,3 +6,5 @@ MPlus input and output files beginning with ANS_TSST are the primary analysis sc
 all.long0.csv is the dataset. 
 
 MPlus input and output files beginning with rt23 were used to evaluate the impact of respiration on the overall pattern of results.
+
+long.wresp0.csv is the dataset with respiration.

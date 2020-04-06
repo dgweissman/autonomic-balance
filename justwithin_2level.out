@@ -1,0 +1,752 @@
+Mplus VERSION 8 (Mac)
+MUTHEN & MUTHEN
+04/06/2020  11:47 AM
+
+INPUT INSTRUCTIONS
+
+  title:
+   bivariate growth model autonomic space
+
+  data:
+  FILE = all.long0.csv;
+
+  variable:
+  names are
+  ID RSA PEP RSAb PEPb	
+  ps2 psc rt2 rt3	
+  baseline math	 prep qa recover speech	
+  female	negative positive	
+  RSAbc PEPbc RSAr PEPr black agec
+  rsarz peprz;
+
+
+  USEVARIABLES = rsar pepr
+  !positive female rsabc pepbc;
+  math baseline prep recover speech qa;
+  within = rsar pepr
+  math baseline prep recover speech qa;
+  !between = positive female rsabc pepbc;
+
+  CLUSTER = id;
+  missing = .;
+  	
+  ANALYSIS:
+  	coverage = 0;
+  	model = nocovariances;
+  	TYPE = TWOLEVEL RANDOM;
+  	ESTIMATOR = ML;
+
+  MODEL:
+
+  %WITHIN%
+
+  rsar pepr on prep speech math recover qa;
+
+  pepr with rsar;
+
+  !S|peprz on rsarz;
+
+  ![rsarz@0 peprz@0];
+
+  %BETWEEN%
+
+  !S; [S];
+
+  !S on positive female rsabc pepbc;
+
+
+  OUTPUT: SAMPSTAT STANDARDIZED CINTERVAL;
+
+
+
+*** WARNING in MODEL command
+  Variable is uncorrelated with all other variables: BASELINE
+*** WARNING in MODEL command
+  At least one variable is uncorrelated with all other variables in the model.
+  Check that this is what is intended.
+*** WARNING
+  One or more individual-level variables have no variation within a
+  cluster for the following clusters.
+
+     Variable   Cluster IDs with no within-cluster variation
+
+      BASELINE    4020 4022
+      MATH        3917 4020 4022 3024 1099 3918 4009 3054 3081 3087 3095 1090 3050 3090 3058 3065
+                  3053 3076 3085 3916 3061 3086 3025 3031 3001 3088 3046 3096 3011 3051 3052 3015
+                  3023 4002 3030 3072 3073 3075 3003 3018 3071 4040 4048 4049 4052 3014 3078 3080
+                  3019 3021 3094 3027 3920 4014 3062 3002 3007 3013 3020 3091 3093 4007 4011 4031
+                  4041 4043 4046 3063 3004 3009 3022 3066 3915 3919 4001 4004 4005 4006 4008 4010
+                  4012 4013 4015 4016 4017 4018 4019 4023 4024 4025 4027 4028 4029 4032 4033 4034
+                  4035 4036 4037 4038 4042 4044 4045 4047 4051 4053 4054 4055 4056 4057 4059 4060
+                  4062 4063 4064 4066 4067 4071 4072
+      PREP        4020 4022 3081 3050 3025 3011 3015 4040
+      RECOVER     3917 4020 4022 3024 3918 4009 3054 1131 3085 3001 3046 1028 1060 3096 3051 4002
+                  1009
+      SPEECH      3917 4020 4022 3024 1099 3918 1090 1119 2030
+      QA          3917 4020 4022 3024 1099 3918 4009 3054 1031 1090 1131 1119 2030 1057 1028 1060
+                  1043 1133 1004 1022 2015 1009 2032 1103 2020 1006 1002 2033 1104 1110 1076 1085
+                  1088 2003 1024 1091 1017 1059 1012 1137 2001 1068 2010 2014 1044 2018 1081 2023
+                  2026 1050 1007 1130 2036 2041 2051 2063 1062 2075 1114 2011 1092 1093 1096 2019
+                  1008 2021 2022 1075 2024 2025 1147 2027 1156 1165 1167 1169 2037 1171 2042 2046
+                  1039 1055 1056 2002 1018 2004 2005 2006 2007 2008 2009 1058 1019 2012 2013 1020
+                  1003 2016 2017 1063 1065 1066 1010 1070 1072 1073 1026 1027 1078 2028 2029 1080
+                  2031 1011 1030 2034 2035 1087 1001 2038 2039 2040 1032 1033 2043 2044 2045 1034
+                  2047 2048 2049 2050 1035 2052 2053 2054 2055 2056 2057 2058 2059 2060 2061 1094
+                  2065 1095 2080 2134 1036 1097 1098 1037 1100 1101 1102 1038 1013 1105 1106 1107
+                  1108 1109 1040 1111 1112 1113 1041 1115 1116 1118 1042 1120 1122 1123 1128 1014
+                  1016 1047 1134 1135 1136 1049 1138 1139 1140 1141 1142 1143 1144 1145 1146 1005
+                  1148 1149 1150 1151 1152 1153 1154 1155 1051 1157 1158 1159 1160 1161 1162 1163
+                  1052 1166 1053 1168 1054 1170 2062
+
+*** WARNING in OUTPUT command
+  STANDARDIZED (STD, STDY, STDYX) options are available only for TYPE=TWOLEVEL RANDOM
+  with ESTIMATOR=BAYES.  Request for STANDARDIZED (STD, STDY, STDYX) is ignored.
+   4 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+bivariate growth model autonomic space
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        7528
+
+Number of dependent variables                                    3
+Number of independent variables                                  5
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   RSAR        PEPR        BASELINE
+
+Observed independent variables
+   MATH        PREP        RECOVER     SPEECH      QA
+
+Variables with special functions
+
+  Cluster variable      ID
+
+  Within variables
+   RSAR        PEPR        MATH        BASELINE    PREP        RECOVER
+   SPEECH      QA
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  all.long0.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of clusters                        325
+
+     Average cluster size       23.163
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation   Variable  Correlation
+
+     RSAR         0.000      PEPR         0.000      BASELINE     0.000
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.000
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+ RSAR           1.000
+ PEPR           1.000         1.000
+ BASELINE       1.000         1.000         1.000
+ MATH           1.000         1.000         1.000         1.000
+ PREP           1.000         1.000         1.000         1.000         1.000
+ RECOVER        1.000         1.000         1.000         1.000         1.000
+ SPEECH         1.000         1.000         1.000         1.000         1.000
+ QA             1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+ RECOVER        1.000
+ SPEECH         1.000         1.000
+ QA             1.000         1.000         1.000
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+               -0.240        -7.862         0.211         0.135         0.160
+
+
+           Means
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+                0.187         0.240         0.067
+
+
+           Covariances
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+ RSAR           2.567
+ PEPR           2.944       162.031
+ BASELINE       0.051         1.666         0.167
+ MATH          -0.005        -0.431        -0.029         0.117
+ PREP          -0.036        -0.972        -0.034        -0.022         0.134
+ RECOVER        0.067         0.684        -0.039        -0.025        -0.030
+ SPEECH        -0.055        -0.980        -0.051        -0.032        -0.038
+ QA            -0.021         0.034        -0.014        -0.009        -0.011
+
+
+           Covariances
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+ RECOVER        0.152
+ SPEECH        -0.045         0.182
+ QA            -0.013        -0.016         0.063
+
+
+           Correlations
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+ RSAR           1.000
+ PEPR           0.144         1.000
+ BASELINE       0.078         0.320         1.000
+ MATH          -0.010        -0.099        -0.205         1.000
+ PREP          -0.061        -0.208        -0.226        -0.173         1.000
+ RECOVER        0.107         0.138        -0.248        -0.189        -0.209
+ SPEECH        -0.081        -0.180        -0.291        -0.222        -0.245
+ QA            -0.053         0.011        -0.139        -0.106        -0.117
+
+
+           Correlations
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+ RECOVER        1.000
+ SPEECH        -0.269         1.000
+ QA            -0.129        -0.151         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           Means
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           Covariances
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+ RSAR           0.000
+ PEPR           0.000         0.000
+ BASELINE       0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ QA             0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+ RECOVER        0.000
+ SPEECH         0.000         0.000
+ QA             0.000         0.000         0.000
+
+
+           Correlations
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+ RSAR           0.000
+ PEPR           0.000         0.000
+ BASELINE       0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ QA             0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+ RECOVER        0.000
+ SPEECH         0.000         0.000
+ QA             0.000         0.000         0.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS 20805.921
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     RSAR                 -0.240       1.424      -6.609    0.01%      -1.277     -0.523     -0.257
+            7528.000       2.567       6.906      10.902    0.01%      -0.038      0.507
+     PEPR                 -7.862      -1.413     -93.800    0.01%     -14.600     -7.200     -4.800
+            7528.000     162.031       3.758      64.200    0.01%      -2.600      0.400
+     BASELINE              0.211       1.414       0.000   78.87%       0.000      0.000      0.000
+            7528.000       0.167       0.000       1.000   21.13%       0.000      1.000
+     MATH                  0.135       2.132       0.000   86.46%       0.000      0.000      0.000
+            7528.000       0.117       2.544       1.000   13.54%       0.000      0.000
+     PREP                  0.160       1.857       0.000   84.02%       0.000      0.000      0.000
+            7528.000       0.134       1.448       1.000   15.98%       0.000      0.000
+     RECOVER               0.187       1.610       0.000   81.35%       0.000      0.000      0.000
+            7528.000       0.152       0.591       1.000   18.65%       0.000      0.000
+     SPEECH                0.240       1.220       0.000   76.04%       0.000      0.000      0.000
+            7528.000       0.182      -0.512       1.000   23.96%       0.000      1.000
+     QA                    0.067       3.453       0.000   93.27%       0.000      0.000      0.000
+            7528.000       0.063       9.920       1.000    6.73%       0.000      0.000
+
+     THE STANDARD ERRORS OF THE MODEL PARAMETER ESTIMATES MAY NOT BE
+     TRUSTWORTHY FOR SOME PARAMETERS DUE TO A NON-POSITIVE DEFINITE
+     FIRST-ORDER DERIVATIVE PRODUCT MATRIX.  THIS MAY BE DUE TO THE STARTING
+     VALUES BUT MAY ALSO BE AN INDICATION OF MODEL NONIDENTIFICATION.  THE
+     CONDITION NUMBER IS      -0.151D-14.  PROBLEM INVOLVING THE FOLLOWING PARAMETER:
+     Parameter 2, %WITHIN%: BASELINE
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       17
+
+Loglikelihood
+
+          H0 Value                      -47182.369
+          H1 Value                       20805.921
+
+Information Criteria
+
+          Akaike (AIC)                   94398.738
+          Bayesian (BIC)                 94516.487
+          Sample-Size Adjusted BIC       94462.464
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                         135976.581
+          Degrees of Freedom                     7
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           1.606
+
+CFI/TLI
+
+          CFI                                0.012
+          TLI                               -1.541
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                         137611.181
+          Degrees of Freedom                    18
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value for Within                   0.101
+          Value for Between                  0.000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ RSAR       ON
+    PREP              -0.463      0.060     -7.664      0.000
+    SPEECH            -0.472      0.054     -8.666      0.000
+    MATH              -0.281      0.063     -4.428      0.000
+    RECOVER            0.116      0.058      2.003      0.045
+    QA                -0.555      0.081     -6.884      0.000
+
+ PEPR       ON
+    PREP             -13.964      0.444    -31.445      0.000
+    SPEECH           -11.972      0.400    -29.949      0.000
+    MATH             -11.067      0.466    -23.731      0.000
+    RECOVER           -4.214      0.426     -9.903      0.000
+    QA                -7.373      0.593    -12.439      0.000
+
+ PEPR     WITH
+    RSAR               1.849      0.213      8.682      0.000
+
+ Means
+    BASELINE           0.211      0.005     44.915      0.000
+
+ Intercepts
+    RSAR               0.001      0.040      0.022      0.982
+    PEPR               0.019      0.291      0.064      0.949
+
+ Variances
+    BASELINE           0.167      0.003     61.351      0.000
+
+ Residual Variances
+    RSAR               2.503      0.041     61.351      0.000
+    PEPR             135.084      2.202     61.351      0.000
+
+Between Level
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix             -0.151E-14
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ RSAR     ON
+    PREP            -0.619      -0.582      -0.563      -0.463      -0.364      -0.345      -0.308
+    SPEECH          -0.612      -0.578      -0.561      -0.472      -0.382      -0.365      -0.331
+    MATH            -0.445      -0.406      -0.386      -0.281      -0.177      -0.157      -0.118
+    RECOVER         -0.033       0.002       0.021       0.116       0.211       0.230       0.265
+    QA              -0.763      -0.714      -0.688      -0.555      -0.423      -0.397      -0.348
+
+ PEPR     ON
+    PREP           -15.107     -14.834     -14.694     -13.964     -13.233     -13.093     -12.820
+    SPEECH         -13.001     -12.755     -12.629     -11.972     -11.314     -11.188     -10.942
+    MATH           -12.268     -11.981     -11.834     -11.067     -10.300     -10.153      -9.866
+    RECOVER         -5.311      -5.049      -4.914      -4.214      -3.514      -3.380      -3.118
+    QA              -8.900      -8.535      -8.348      -7.373      -6.398      -6.211      -5.846
+
+ PEPR     WITH
+    RSAR             1.301       1.432       1.499       1.849       2.200       2.267       2.398
+
+ Means
+    BASELINE         0.199       0.202       0.204       0.211       0.219       0.221       0.223
+
+ Intercepts
+    RSAR            -0.101      -0.077      -0.064       0.001       0.066       0.079       0.103
+    PEPR            -0.732      -0.553      -0.461       0.019       0.498       0.590       0.769
+
+ Variances
+    BASELINE         0.160       0.161       0.162       0.167       0.171       0.172       0.174
+
+ Residual Variances
+    RSAR             2.398       2.423       2.436       2.503       2.570       2.583       2.608
+    PEPR           129.412     130.768     131.462     135.084     138.706     139.399     140.755
+
+Between Level
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+                    0             0             1             0             0
+
+
+           NU
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+                    0             0             0
+
+
+           LAMBDA
+              RSAR          PEPR          MATH          PREP          RECOVER
+              ________      ________      ________      ________      ________
+ RSAR               0             0             0             0             0
+ PEPR               0             0             0             0             0
+ BASELINE           0             0             0             0             0
+ MATH               0             0             0             0             0
+ PREP               0             0             0             0             0
+ RECOVER            0             0             0             0             0
+ SPEECH             0             0             0             0             0
+ QA                 0             0             0             0             0
+
+
+           LAMBDA
+              SPEECH        QA
+              ________      ________
+ RSAR               0             0
+ PEPR               0             0
+ BASELINE           0             0
+ MATH               0             0
+ PREP               0             0
+ RECOVER            0             0
+ SPEECH             0             0
+ QA                 0             0
+
+
+           THETA
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+ RSAR               0
+ PEPR               0             0
+ BASELINE           0             0             2
+ MATH               0             0             0             0
+ PREP               0             0             0             0             0
+ RECOVER            0             0             0             0             0
+ SPEECH             0             0             0             0             0
+ QA                 0             0             0             0             0
+
+
+           THETA
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+ RECOVER            0
+ SPEECH             0             0
+ QA                 0             0             0
+
+
+           ALPHA
+              RSAR          PEPR          MATH          PREP          RECOVER
+              ________      ________      ________      ________      ________
+                    3             4             0             0             0
+
+
+           ALPHA
+              SPEECH        QA
+              ________      ________
+                    0             0
+
+
+           BETA
+              RSAR          PEPR          MATH          PREP          RECOVER
+              ________      ________      ________      ________      ________
+ RSAR               0             0             5             6             7
+ PEPR               0             0            10            11            12
+ MATH               0             0             0             0             0
+ PREP               0             0             0             0             0
+ RECOVER            0             0             0             0             0
+ SPEECH             0             0             0             0             0
+ QA                 0             0             0             0             0
+
+
+           BETA
+              SPEECH        QA
+              ________      ________
+ RSAR               8             9
+ PEPR              13            14
+ MATH               0             0
+ PREP               0             0
+ RECOVER            0             0
+ SPEECH             0             0
+ QA                 0             0
+
+
+           PSI
+              RSAR          PEPR          MATH          PREP          RECOVER
+              ________      ________      ________      ________      ________
+ RSAR              15
+ PEPR              16            17
+ MATH               0             0             0
+ PREP               0             0             0             0
+ RECOVER            0             0             0             0             0
+ SPEECH             0             0             0             0             0
+ QA                 0             0             0             0             0
+
+
+           PSI
+              SPEECH        QA
+              ________      ________
+ SPEECH             0
+ QA                 0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.211         0.000         0.000
+
+
+           NU
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           LAMBDA
+              RSAR          PEPR          MATH          PREP          RECOVER
+              ________      ________      ________      ________      ________
+ RSAR           1.000         0.000         0.000         0.000         0.000
+ PEPR           0.000         1.000         0.000         0.000         0.000
+ BASELINE       0.000         0.000         0.000         0.000         0.000
+ MATH           0.000         0.000         1.000         0.000         0.000
+ PREP           0.000         0.000         0.000         1.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         1.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ QA             0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              SPEECH        QA
+              ________      ________
+ RSAR           0.000         0.000
+ PEPR           0.000         0.000
+ BASELINE       0.000         0.000
+ MATH           0.000         0.000
+ PREP           0.000         0.000
+ RECOVER        0.000         0.000
+ SPEECH         1.000         0.000
+ QA             0.000         1.000
+
+
+           THETA
+              RSAR          PEPR          BASELINE      MATH          PREP
+              ________      ________      ________      ________      ________
+ RSAR           0.000
+ PEPR           0.000         0.000
+ BASELINE       0.000         0.000         0.083
+ MATH           0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ QA             0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              RECOVER       SPEECH        QA
+              ________      ________      ________
+ RECOVER        0.000
+ SPEECH         0.000         0.000
+ QA             0.000         0.000         0.000
+
+
+           ALPHA
+              RSAR          PEPR          MATH          PREP          RECOVER
+              ________      ________      ________      ________      ________
+               -0.240        -7.862         0.000         0.000         0.000
+
+
+           ALPHA
+              SPEECH        QA
+              ________      ________
+                0.000         0.000
+
+
+           BETA
+              RSAR          PEPR          MATH          PREP          RECOVER
+              ________      ________      ________      ________      ________
+ RSAR           0.000         0.000         0.000         0.000         0.000
+ PEPR           0.000         0.000         0.000         0.000         0.000
+ MATH           0.000         0.000         0.000         0.000         0.000
+ PREP           0.000         0.000         0.000         0.000         0.000
+ RECOVER        0.000         0.000         0.000         0.000         0.000
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ QA             0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              SPEECH        QA
+              ________      ________
+ RSAR           0.000         0.000
+ PEPR           0.000         0.000
+ MATH           0.000         0.000
+ PREP           0.000         0.000
+ RECOVER        0.000         0.000
+ SPEECH         0.000         0.000
+ QA             0.000         0.000
+
+
+           PSI
+              RSAR          PEPR          MATH          PREP          RECOVER
+              ________      ________      ________      ________      ________
+ RSAR           1.283
+ PEPR           0.000        81.016
+ MATH           0.000         0.000         0.059
+ PREP           0.000         0.000         0.000         0.067
+ RECOVER        0.000         0.000         0.000         0.000         0.076
+ SPEECH         0.000         0.000         0.000         0.000         0.000
+ QA             0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              SPEECH        QA
+              ________      ________
+ SPEECH         0.091
+ QA             0.000         0.031
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+     Beginning Time:  11:47:11
+        Ending Time:  11:47:12
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

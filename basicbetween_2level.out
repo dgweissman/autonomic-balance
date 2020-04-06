@@ -1,0 +1,318 @@
+Mplus VERSION 8 (Mac)
+MUTHEN & MUTHEN
+04/06/2020  12:03 PM
+
+INPUT INSTRUCTIONS
+
+  title:
+   bivariate growth model autonomic space
+
+  data:
+  FILE = all.long0.csv;
+
+  variable:
+  names are
+  ID RSA PEP RSAb PEPb	
+  ps2 psc rt2 rt3	
+  baseline math	 prep qa recover speech	
+  female	negative positive	
+  RSAbc PEPbc RSAr PEPr black agec
+  rsarz peprz;
+
+
+  USEVARIABLES = rsarz peprz;
+  !positive female rsabc pepbc;
+  !math baseline prep recover speech qa;
+  within = rsarz peprz;
+  !math baseline prep recover speech qa;
+  !between = positive female rsabc pepbc;
+
+  CLUSTER = id;
+  missing = .;
+  	
+  ANALYSIS:
+  	coverage = 0;
+  	model = nocovariances;
+  	TYPE = TWOLEVEL RANDOM;
+  	ESTIMATOR = ML;
+
+  MODEL:
+
+  %WITHIN%
+
+  S|peprz on rsarz;
+
+  [rsarz@0 peprz@0];
+
+  %BETWEEN%
+
+  S; [S];
+
+  !S on positive female rsabc pepbc;
+
+
+  OUTPUT: SAMPSTAT STANDARDIZED CINTERVAL;
+
+
+
+*** WARNING in MODEL command
+  Variable on the left-hand side of an ON statement in a | statement is a
+  WITHIN variable.  The intercept for this variable is not random.
+  Variable:  PEPRZ
+*** WARNING in OUTPUT command
+  STANDARDIZED (STD, STDY, STDYX) options are available only for TYPE=TWOLEVEL RANDOM
+  with ESTIMATOR=BAYES.  Request for STANDARDIZED (STD, STDY, STDYX) is ignored.
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+bivariate growth model autonomic space
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        7528
+
+Number of dependent variables                                    1
+Number of independent variables                                  1
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   PEPRZ
+
+Observed independent variables
+   RSARZ
+
+Continuous latent variables
+   S
+
+Variables with special functions
+
+  Cluster variable      ID
+
+  Within variables
+   RSARZ       PEPRZ
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  all.long0.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of clusters                        325
+
+     Average cluster size       23.163
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation   Variable  Correlation
+
+     PEPRZ        0.000      RSARZ        0.000
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.000
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              PEPRZ         RSARZ
+              ________      ________
+ PEPRZ          1.000
+ RSARZ          1.000         1.000
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              PEPRZ         RSARZ
+              ________      ________
+                0.000         0.000
+
+
+           Covariances
+              PEPRZ         RSARZ
+              ________      ________
+ PEPRZ          0.957
+ RSARZ          0.159         0.957
+
+
+           Correlations
+              PEPRZ         RSARZ
+              ________      ________
+ PEPRZ          1.000
+ RSARZ          0.166         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              PEPRZ         RSARZ
+              ________      ________
+                0.000         0.000
+
+
+           Covariances
+              PEPRZ         RSARZ
+              ________      ________
+ PEPRZ          0.000
+ RSARZ          0.000         0.000
+
+
+           Correlations
+              PEPRZ         RSARZ
+              ________      ________
+ PEPRZ          0.000
+ RSARZ          0.000         0.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -20926.516
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     PEPRZ                 0.000       0.317      -3.983    0.01%      -0.806     -0.310     -0.075
+            7528.000       0.957       0.472       4.368    0.01%       0.182      0.818
+     RSARZ                 0.000      -0.149      -4.534    0.01%      -0.786     -0.255     -0.007
+            7528.000       0.957       0.502       4.477    0.01%       0.254      0.857
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        4
+
+Loglikelihood
+
+          H0 Value                      -20746.708
+
+Information Criteria
+
+          Akaike (AIC)                   41501.416
+          Bayesian (BIC)                 41529.121
+          Sample-Size Adjusted BIC       41516.410
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ Means
+    RSARZ              0.000      0.000    999.000    999.000
+
+ Intercepts
+    PEPRZ              0.000      0.000    999.000    999.000
+
+ Variances
+    RSARZ              0.957      0.016     61.351      0.000
+
+ Residual Variances
+    PEPRZ              0.841      0.014     60.016      0.000
+
+Between Level
+
+ Means
+    S                  0.164      0.020      8.076      0.000
+
+ Variances
+    S                  0.095      0.011      8.968      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.259E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ Means
+    RSARZ            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Intercepts
+    PEPRZ            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Variances
+    RSARZ            0.917       0.926       0.931       0.957       0.982       0.987       0.997
+
+ Residual Variances
+    PEPRZ            0.805       0.814       0.818       0.841       0.864       0.868       0.877
+
+Between Level
+
+ Means
+    S                0.112       0.124       0.131       0.164       0.198       0.204       0.217
+
+ Variances
+    S                0.068       0.074       0.077       0.095       0.112       0.115       0.122
+
+
+     Beginning Time:  12:03:03
+        Ending Time:  12:03:04
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

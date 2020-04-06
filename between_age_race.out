@@ -1,0 +1,512 @@
+Mplus VERSION 8 (Mac)
+MUTHEN & MUTHEN
+04/06/2020   1:35 PM
+
+INPUT INSTRUCTIONS
+
+  title:
+   bivariate growth model autonomic space
+
+  data:
+  FILE = all.longrt20.csv;
+
+  variable:
+  names are
+  ID RSA PEP RSAb PEPb	
+  ps2 psc rt2 rt3	
+  baseline math prep qa recover speech	
+  female negative positive	
+  RSAbc PEPbc RSAr PEPr black agec
+  rsarz peprz RSAbz PEPbz femalez agez blackz;
+
+
+  USEVARIABLES = rsarz peprz
+  rsabz pepbz femalez agez blackz;
+  !math baseline prep recover speech qa;
+  within = rsarz peprz;
+  !math baseline prep recover speech qa;
+  between = rsabz pepbz femalez agez blackz;
+
+  CLUSTER = id;
+  missing = .;
+  	
+  ANALYSIS:
+  	coverage = 0;
+  	model = nocovariances;
+  	TYPE = TWOLEVEL RANDOM;
+  	ESTIMATOR = ML;
+
+  MODEL:
+
+  %WITHIN%
+
+  S|peprz on rsarz;
+
+  [rsarz@0 peprz@0];
+
+  %BETWEEN%
+
+  S; [S];
+
+  s on rsabz (b);
+  s on pepbz;
+  s on femalez (c1);
+  s on agez (c2);
+  s on blackz (c3);
+  rsabz on femalez (a1);
+  rsabz on agez (a2);
+  rsabz on blackz (a3);
+  pepbz on femalez agez blackz;
+
+
+  MODEL CONSTRAINT:
+
+  NEW(ind1);
+
+  ind1=a1*b;
+
+  NEW(tot1);
+
+  tot1=a1*b+c1;
+
+  NEW(ind2);
+
+  ind2=a2*b;
+
+  NEW(tot2);
+
+  tot2=a2*b+c2;
+
+  NEW(ind3);
+
+  ind3=a3*b;
+
+  NEW(tot3);
+
+  tot3=a3*b+c3;
+
+  NEW(ind);
+
+  ind=(a1+a2+a3)*b;
+
+  NEW(tot);
+
+  tot=(a1+a2+a3)*b+c1+c2+c3;
+
+
+  OUTPUT: SAMPSTAT STANDARDIZED CINTERVAL;
+
+
+
+*** WARNING in MODEL command
+  Variable on the left-hand side of an ON statement in a | statement is a
+  WITHIN variable.  The intercept for this variable is not random.
+  Variable:  PEPRZ
+*** WARNING in OUTPUT command
+  STANDARDIZED (STD, STDY, STDYX) options are available only for TYPE=TWOLEVEL RANDOM
+  with ESTIMATOR=BAYES.  Request for STANDARDIZED (STD, STDY, STDYX) is ignored.
+*** WARNING
+  Data set contains cases with missing on x-variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on x-variables:  246
+   3 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+bivariate growth model autonomic space
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        3092
+
+Number of dependent variables                                    3
+Number of independent variables                                  4
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   RSABZ       PEPBZ       PEPRZ
+
+Observed independent variables
+   RSARZ       FEMALEZ     AGEZ        BLACKZ
+
+Continuous latent variables
+   S
+
+Variables with special functions
+
+  Cluster variable      ID
+
+  Within variables
+   RSARZ       PEPRZ
+
+  Between variables
+   RSABZ       PEPBZ       FEMALEZ     AGEZ        BLACKZ
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  all.longrt20.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of clusters                        131
+
+     Average cluster size       23.603
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation   Variable  Correlation
+
+     PEPRZ        0.000      RSARZ        0.000
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.000
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              RSABZ         PEPBZ         PEPRZ         RSARZ         FEMALEZ
+              ________      ________      ________      ________      ________
+ RSABZ          1.000
+ PEPBZ          1.000         1.000
+ PEPRZ          1.000         1.000         1.000
+ RSARZ          1.000         1.000         1.000         1.000
+ FEMALEZ        1.000         1.000         1.000         1.000         1.000
+ AGEZ           1.000         1.000         1.000         1.000         1.000
+ BLACKZ         1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              AGEZ          BLACKZ
+              ________      ________
+ AGEZ           1.000
+ BLACKZ         1.000         1.000
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              RSABZ         PEPBZ         PEPRZ         RSARZ         FEMALEZ
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           Means
+              AGEZ          BLACKZ
+              ________      ________
+                0.000         0.000
+
+
+           Covariances
+              RSABZ         PEPBZ         PEPRZ         RSARZ         FEMALEZ
+              ________      ________      ________      ________      ________
+ RSABZ          0.000
+ PEPBZ          0.000         0.000
+ PEPRZ          0.000         0.000         0.958
+ RSARZ          0.000         0.000         0.072         0.958
+ FEMALEZ        0.000         0.000         0.000         0.000         0.000
+ AGEZ           0.000         0.000         0.000         0.000         0.000
+ BLACKZ         0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              AGEZ          BLACKZ
+              ________      ________
+ AGEZ           0.000
+ BLACKZ         0.000         0.000
+
+
+           Correlations
+              RSABZ         PEPBZ         PEPRZ         RSARZ         FEMALEZ
+              ________      ________      ________      ________      ________
+ RSABZ          0.000
+ PEPBZ          0.000         0.000
+ PEPRZ          0.000         0.000         1.000
+ RSARZ          0.000         0.000         0.075         1.000
+ FEMALEZ        0.000         0.000         0.000         0.000         0.000
+ AGEZ           0.000         0.000         0.000         0.000         0.000
+ BLACKZ         0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              AGEZ          BLACKZ
+              ________      ________
+ AGEZ           0.000
+ BLACKZ         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              RSABZ         PEPBZ         PEPRZ         RSARZ         FEMALEZ
+              ________      ________      ________      ________      ________
+               -0.047        -0.009         0.000         0.000        -0.032
+
+
+           Means
+              AGEZ          BLACKZ
+              ________      ________
+                0.040        -0.019
+
+
+           Covariances
+              RSABZ         PEPBZ         PEPRZ         RSARZ         FEMALEZ
+              ________      ________      ________      ________      ________
+ RSABZ          1.001
+ PEPBZ         -0.136         0.995
+ PEPRZ          0.000         0.000         0.000
+ RSARZ          0.000         0.000         0.000         0.000
+ FEMALEZ        0.180        -0.027         0.000         0.000         1.007
+ AGEZ          -0.513         0.136         0.000         0.000        -0.107
+ BLACKZ         0.168        -0.044         0.000         0.000        -0.050
+
+
+           Covariances
+              AGEZ          BLACKZ
+              ________      ________
+ AGEZ           1.043
+ BLACKZ        -0.225         0.999
+
+
+           Correlations
+              RSABZ         PEPBZ         PEPRZ         RSARZ         FEMALEZ
+              ________      ________      ________      ________      ________
+ RSABZ          1.000
+ PEPBZ         -0.136         1.000
+ PEPRZ          0.000         0.000         0.000
+ RSARZ          0.000         0.000         0.000         0.000
+ FEMALEZ        0.179        -0.027         0.000         0.000         1.000
+ AGEZ          -0.502         0.133         0.000         0.000        -0.104
+ BLACKZ         0.168        -0.044         0.000         0.000        -0.050
+
+
+           Correlations
+              AGEZ          BLACKZ
+              ________      ________
+ AGEZ           1.000
+ BLACKZ        -0.221         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -8981.128
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     RSABZ                -0.047       0.227      -2.789    0.76%      -0.919     -0.304     -0.066
+             131.000       1.001       0.411       2.895    0.76%       0.182      0.695
+     PEPBZ                -0.009      -0.626      -3.256    0.76%      -0.544     -0.113      0.146
+             131.000       0.995       1.135       2.906    0.76%       0.290      0.683
+     PEPRZ                 0.000       0.619      -3.107    0.03%      -0.775     -0.351     -0.134
+            3092.000       0.958       0.895       4.368    0.03%       0.107      0.782
+     RSARZ                 0.000      -0.244      -4.534    0.03%      -0.797     -0.255      0.013
+            3092.000       0.958       0.394       4.477    0.03%       0.260      0.890
+     FEMALEZ              -0.032      -0.199      -1.140   45.04%      -1.140     -1.140      0.877
+             131.000       1.007      -1.960       0.877   54.96%       0.877      0.877
+     AGEZ                  0.040       0.962      -1.298    1.53%      -0.723     -0.627     -0.435
+             131.000       1.043      -0.391       2.540    1.53%      -0.147      1.100
+     BLACKZ               -0.019       0.076      -0.981   51.91%      -0.981     -0.981     -0.981
+             131.000       0.999      -1.994       1.019   48.09%       1.019      1.019
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       19
+
+Loglikelihood
+
+          H0 Value                       -8895.099
+
+Information Criteria
+
+          Akaike (AIC)                   17828.197
+          Bayesian (BIC)                 17942.892
+          Sample-Size Adjusted BIC       17882.522
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ Means
+    RSARZ              0.000      0.000    999.000    999.000
+
+ Intercepts
+    PEPRZ              0.000      0.000    999.000    999.000
+
+ Variances
+    RSARZ              0.958      0.024     39.319      0.000
+
+ Residual Variances
+    PEPRZ              0.862      0.022     38.495      0.000
+
+Between Level
+
+ S          ON
+    RSABZ              0.094      0.034      2.799      0.005
+    PEPBZ             -0.024      0.029     -0.820      0.412
+    FEMALEZ            0.088      0.029      3.017      0.003
+    AGEZ              -0.016      0.033     -0.467      0.641
+    BLACKZ             0.035      0.030      1.190      0.234
+
+ RSABZ      ON
+    FEMALEZ            0.133      0.075      1.775      0.076
+    AGEZ              -0.463      0.075     -6.142      0.000
+    BLACKZ             0.071      0.077      0.924      0.356
+
+ PEPBZ      ON
+    FEMALEZ           -0.014      0.087     -0.163      0.871
+    AGEZ               0.125      0.087      1.435      0.151
+    BLACKZ            -0.017      0.089     -0.186      0.853
+
+ Intercepts
+    RSABZ             -0.023      0.075     -0.308      0.758
+    PEPBZ             -0.015      0.086     -0.169      0.866
+    S                  0.077      0.029      2.691      0.007
+
+ Residual Variances
+    RSABZ              0.728      0.090      8.093      0.000
+    PEPBZ              0.977      0.121      8.093      0.000
+    S                  0.069      0.013      5.210      0.000
+
+New/Additional Parameters
+    IND1               0.013      0.008      1.499      0.134
+    TOT1               0.100      0.030      3.384      0.001
+    IND2              -0.044      0.017     -2.547      0.011
+    TOT2              -0.059      0.030     -1.942      0.052
+    IND3               0.007      0.008      0.877      0.380
+    TOT3               0.042      0.030      1.379      0.168
+    IND               -0.024      0.016     -1.482      0.138
+    TOT                0.083      0.059      1.405      0.160
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.431E-06
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ Means
+    RSARZ            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Intercepts
+    PEPRZ            0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Variances
+    RSARZ            0.895       0.910       0.918       0.958       0.998       1.005       1.020
+
+ Residual Variances
+    PEPRZ            0.805       0.818       0.825       0.862       0.899       0.906       0.920
+
+Between Level
+
+ S        ON
+    RSABZ            0.008       0.028       0.039       0.094       0.149       0.160       0.181
+    PEPBZ           -0.099      -0.081      -0.072      -0.024       0.024       0.033       0.051
+    FEMALEZ          0.013       0.031       0.040       0.088       0.136       0.145       0.163
+    AGEZ            -0.101      -0.081      -0.070      -0.016       0.039       0.050       0.070
+    BLACKZ          -0.041      -0.023      -0.013       0.035       0.084       0.093       0.111
+
+ RSABZ    ON
+    FEMALEZ         -0.060      -0.014       0.010       0.133       0.256       0.280       0.326
+    AGEZ            -0.657      -0.610      -0.587      -0.463      -0.339      -0.315      -0.269
+    BLACKZ          -0.127      -0.079      -0.055       0.071       0.197       0.221       0.268
+
+ PEPBZ    ON
+    FEMALEZ         -0.238      -0.184      -0.157      -0.014       0.129       0.156       0.209
+    AGEZ            -0.100      -0.046      -0.018       0.125       0.269       0.296       0.350
+    BLACKZ          -0.245      -0.191      -0.163      -0.017       0.130       0.158       0.212
+
+ Intercepts
+    RSABZ           -0.215      -0.169      -0.146      -0.023       0.100       0.123       0.169
+    PEPBZ           -0.237      -0.184      -0.157      -0.015       0.128       0.155       0.208
+    S                0.003       0.021       0.030       0.077       0.124       0.133       0.151
+
+ Residual Variances
+    RSABZ            0.496       0.551       0.580       0.728       0.876       0.904       0.959
+    PEPBZ            0.666       0.740       0.778       0.977       1.175       1.213       1.288
+    S                0.035       0.043       0.047       0.069       0.090       0.095       0.103
+
+New/Additional Parameters
+    IND1            -0.009      -0.004      -0.001       0.013       0.026       0.029       0.034
+    TOT1             0.024       0.042       0.052       0.100       0.149       0.159       0.177
+    IND2            -0.088      -0.077      -0.072      -0.044      -0.015      -0.010       0.000
+    TOT2            -0.137      -0.119      -0.109      -0.059      -0.009       0.001       0.019
+    IND3            -0.013      -0.008      -0.006       0.007       0.019       0.022       0.026
+    TOT3            -0.036      -0.018      -0.008       0.042       0.092       0.101       0.120
+    IND             -0.067      -0.057      -0.051      -0.024       0.003       0.008       0.018
+    TOT             -0.069      -0.033      -0.014       0.083       0.181       0.199       0.236
+
+
+     Beginning Time:  13:35:49
+        Ending Time:  13:35:49
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen

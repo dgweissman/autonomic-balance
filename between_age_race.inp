@@ -1,0 +1,91 @@
+title:
+ bivariate growth model autonomic space
+ 
+data:
+FILE = all.longrt20.csv;
+
+variable:
+names are
+ID RSA PEP RSAb PEPb	
+ps2 psc rt2 rt3	
+baseline math prep qa recover speech	
+female negative positive	
+RSAbc PEPbc RSAr PEPr black agec
+rsarz peprz RSAbz PEPbz femalez agez blackz;
+
+
+USEVARIABLES = rsarz peprz
+rsabz pepbz femalez agez blackz;
+!math baseline prep recover speech qa;
+within = rsarz peprz;
+!math baseline prep recover speech qa;
+between = rsabz pepbz femalez agez blackz;
+
+CLUSTER = id;
+missing = .;
+	
+ANALYSIS:
+	coverage = 0;
+	model = nocovariances;
+	TYPE = TWOLEVEL RANDOM;
+	ESTIMATOR = ML;
+
+MODEL:
+
+%WITHIN%
+
+S|peprz on rsarz;
+
+[rsarz@0 peprz@0];
+
+%BETWEEN%
+
+S; [S];
+
+s on rsabz (b); 
+s on pepbz; 
+s on femalez (c1); 
+s on agez (c2); 
+s on blackz (c3);
+rsabz on femalez (a1);
+rsabz on agez (a2);
+rsabz on blackz (a3);
+pepbz on femalez agez blackz;
+
+
+MODEL CONSTRAINT:
+
+NEW(ind1);
+
+ind1=a1*b;
+
+NEW(tot1);
+
+tot1=a1*b+c1;
+
+NEW(ind2);
+
+ind2=a2*b;
+
+NEW(tot2);
+
+tot2=a2*b+c2;
+
+NEW(ind3);
+
+ind3=a3*b;
+
+NEW(tot3);
+
+tot3=a3*b+c3;
+
+NEW(ind);
+
+ind=(a1+a2+a3)*b;
+
+NEW(tot);
+
+tot=(a1+a2+a3)*b+c1+c2+c3;
+
+
+OUTPUT: SAMPSTAT STANDARDIZED CINTERVAL;

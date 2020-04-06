@@ -1,0 +1,59 @@
+title:
+ bivariate growth model autonomic space
+ 
+data:
+FILE = long.wresp0.csv;
+
+variable:
+names are
+ID	RSA	PEP	Resp	task	RSAz	PEPz	
+RSAb	PEPb	Respc	rt3	
+baseline	math	prep	recover	speech
+rsabc pepbc;
+
+
+USEVARIABLES = rsaz pepz 
+!respc 
+rsabc pepbc  
+rt3 
+;
+within = rsaz pepz 
+!respc
+;
+between = 
+rsabc pepbc rt3
+;
+
+CLUSTER = id;
+
+missing = .;
+	
+ANALYSIS:
+	coverage = 0;
+	!model = nocovariances;
+	TYPE = TWOLEVEL RANDOM;
+	ESTIMATOR = ML;
+
+MODEL:
+
+%WITHIN%
+
+!rsaz on respc;
+
+!pepz on respc;
+
+S|rsaz on pepz;
+
+[rsaz@0 pepz@0];
+
+%BETWEEN%
+
+S; [S];
+
+s on 
+rsabc pepbc 
+rt3 
+; 
+
+
+OUTPUT: SAMPSTAT STANDARDIZED CINTERVAL;

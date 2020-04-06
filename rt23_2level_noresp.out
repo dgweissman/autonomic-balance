@@ -1,0 +1,363 @@
+Mplus VERSION 8 (Mac)
+MUTHEN & MUTHEN
+04/06/2020   2:52 PM
+
+INPUT INSTRUCTIONS
+
+  title:
+   bivariate growth model autonomic space
+
+  data:
+  FILE = long.wresp0.csv;
+
+  variable:
+  names are
+  ID	RSA	PEP	Resp	task	RSAz	PEPz	
+  RSAb	PEPb	Respc	rt3	
+  baseline	math	prep	recover	speech
+  rsabc pepbc;
+
+
+  USEVARIABLES = rsaz pepz
+  !respc
+  rsabc pepbc
+  rt3
+  ;
+  within = rsaz pepz
+  !respc
+  ;
+  between =
+  rsabc pepbc rt3
+  ;
+
+  CLUSTER = id;
+
+  missing = .;
+  	
+  ANALYSIS:
+  	coverage = 0;
+  	!model = nocovariances;
+  	TYPE = TWOLEVEL RANDOM;
+  	ESTIMATOR = ML;
+
+  MODEL:
+
+  %WITHIN%
+
+  !rsaz on respc;
+
+  !pepz on respc;
+
+  S|rsaz on pepz;
+
+  [rsaz@0 pepz@0];
+
+  %BETWEEN%
+
+  S; [S];
+
+  s on
+  rsabc pepbc
+  rt3
+  ;
+
+
+  OUTPUT: SAMPSTAT STANDARDIZED CINTERVAL;
+
+
+
+*** WARNING in MODEL command
+  Variable on the left-hand side of an ON statement in a | statement is a
+  WITHIN variable.  The intercept for this variable is not random.
+  Variable:  RSAZ
+*** WARNING in OUTPUT command
+  STANDARDIZED (STD, STDY, STDYX) options are available only for TYPE=TWOLEVEL RANDOM
+  with ESTIMATOR=BAYES.  Request for STANDARDIZED (STD, STDY, STDYX) is ignored.
+   2 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+bivariate growth model autonomic space
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                        5288
+
+Number of dependent variables                                    1
+Number of independent variables                                  4
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   RSAZ
+
+Observed independent variables
+   PEPZ        RSABC       PEPBC       RT3
+
+Continuous latent variables
+   S
+
+Variables with special functions
+
+  Cluster variable      ID
+
+  Within variables
+   RSAZ        PEPZ
+
+  Between variables
+   RSABC       PEPBC       RT3
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  long.wresp0.csv
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of clusters                        220
+
+     Average cluster size       24.036
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation   Variable  Correlation
+
+     RSAZ         0.000      PEPZ         0.000
+
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.000
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              RSAZ          PEPZ          RSABC         PEPBC         RT3
+              ________      ________      ________      ________      ________
+ RSAZ           1.000
+ PEPZ           1.000         1.000
+ RSABC          1.000         1.000         1.000
+ PEPBC          1.000         1.000         1.000         1.000
+ RT3            1.000         1.000         1.000         1.000         1.000
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              RSAZ          PEPZ          RSABC         PEPBC         RT3
+              ________      ________      ________      ________      ________
+               -0.007        -0.001         0.000         0.000         0.000
+
+
+           Covariances
+              RSAZ          PEPZ          RSABC         PEPBC         RT3
+              ________      ________      ________      ________      ________
+ RSAZ           0.949
+ PEPZ           0.116         0.963
+ RSABC          0.000         0.000         0.000
+ PEPBC          0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              RSAZ          PEPZ          RSABC         PEPBC         RT3
+              ________      ________      ________      ________      ________
+ RSAZ           1.000
+ PEPZ           0.121         1.000
+ RSABC          0.000         0.000         0.000
+ PEPBC          0.000         0.000         0.000         0.000
+ RT3            0.000         0.000         0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              RSAZ          PEPZ          RSABC         PEPBC         RT3
+              ________      ________      ________      ________      ________
+                0.000         0.000        -0.027         0.264         0.305
+
+
+           Covariances
+              RSAZ          PEPZ          RSABC         PEPBC         RT3
+              ________      ________      ________      ________      ________
+ RSAZ           0.000
+ PEPZ           0.000         0.000
+ RSABC          0.000         0.000         1.599
+ PEPBC          0.000         0.000        -3.210       347.251
+ RT3            0.000         0.000        -0.066         1.808         0.212
+
+
+           Correlations
+              RSAZ          PEPZ          RSABC         PEPBC         RT3
+              ________      ________      ________      ________      ________
+ RSAZ           0.000
+ PEPZ           0.000         0.000
+ RSABC          0.000         0.000         1.000
+ PEPBC          0.000         0.000        -0.136         1.000
+ RT3            0.000         0.000        -0.113         0.211         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -14728.221
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     RSAZ                 -0.007       0.418      -3.332    0.02%      -0.785     -0.331     -0.101
+            5288.000       0.949       0.693       4.368    0.02%       0.148      0.786
+     PEPZ                 -0.001      -0.225      -4.534    0.02%      -0.801     -0.259     -0.009
+            5288.000       0.963       0.265       4.477    0.02%       0.253      0.897
+     RSABC                -0.027       0.117      -3.625    0.45%      -1.056     -0.319     -0.002
+             220.000       1.599       0.517       3.937    0.45%       0.288      0.846
+     PEPBC                 0.264      -0.761     -70.767    0.45%      -9.767     -1.967      2.533
+             220.000     347.251       1.855      57.833    0.45%       5.033     13.433
+     RT3                   0.305       0.849       0.000   69.55%       0.000      0.000      0.000
+             220.000       0.212      -1.279       1.000   30.45%       0.000      1.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        7
+
+Loglikelihood
+
+          H0 Value                      -14554.283
+
+Information Criteria
+
+          Akaike (AIC)                   29122.567
+          Bayesian (BIC)                 29168.579
+          Sample-Size Adjusted BIC       29146.336
+            (n* = (n + 2) / 24)
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Within Level
+
+ Means
+    PEPZ               0.000      0.000    999.000    999.000
+
+ Intercepts
+    RSAZ               0.000      0.000    999.000    999.000
+
+ Variances
+    PEPZ               0.963      0.019     51.420      0.000
+
+ Residual Variances
+    RSAZ               0.831      0.017     50.338      0.000
+
+Between Level
+
+ S          ON
+    RSABC              0.093      0.019      4.790      0.000
+    PEPBC              0.000      0.001     -0.039      0.969
+    RT3                0.202      0.053      3.782      0.000
+
+ Intercepts
+    S                  0.059      0.029      2.026      0.043
+
+ Residual Variances
+    S                  0.089      0.012      7.356      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.169E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ Means
+    PEPZ             0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Intercepts
+    RSAZ             0.000       0.000       0.000       0.000       0.000       0.000       0.000
+
+ Variances
+    PEPZ             0.915       0.926       0.932       0.963       0.994       1.000       1.011
+
+ Residual Variances
+    RSAZ             0.789       0.799       0.804       0.831       0.859       0.864       0.874
+
+Between Level
+
+ S        ON
+    RSABC            0.043       0.055       0.061       0.093       0.124       0.130       0.142
+    PEPBC           -0.003      -0.003      -0.002       0.000       0.002       0.003       0.003
+    RT3              0.064       0.097       0.114       0.202       0.290       0.306       0.339
+
+ Intercepts
+    S               -0.016       0.002       0.011       0.059       0.107       0.116       0.134
+
+ Residual Variances
+    S                0.058       0.066       0.069       0.089       0.109       0.113       0.121
+
+
+     Beginning Time:  14:52:10
+        Ending Time:  14:52:10
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2017 Muthen & Muthen
